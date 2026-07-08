@@ -26,7 +26,6 @@ test('add to cart product', async ({ page }) => {
     await loginToApplication(page);
 
     // Initialize POM
-    const loginPage = new LoginPagePOM(page);
     const homePage = new HomePagePOM(page);
 
     // Products to add
@@ -37,7 +36,8 @@ test('add to cart product', async ({ page }) => {
     ];
 
     for (const product of products) {
-        await homePage.addToCartBtn(product);
+        await homePage.addToCartBtn(product).click();
     }
+    await page.pause();
 
 })

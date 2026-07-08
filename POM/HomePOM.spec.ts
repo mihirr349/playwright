@@ -18,6 +18,8 @@ export class HomePagePOM {
     }
 
     // Dynamic Locators
-    readonly addToCartBtn = (product: String) => this.page.locator(`//div[text() = '${product}']/ancestor::div[@class = 'inventory_item_description']//button[text() = 'Add to cart']`);
+    addToCartBtn(product: string) {
+        return this.page.locator(`//div[text() = '${product}']/ancestor::div[@class = 'inventory_item_description']//button[text() = 'Add to cart']`);
+    }
 
 }
