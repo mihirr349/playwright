@@ -1,4 +1,4 @@
-import { loginPageDataObject } from "../DataObject/loginPageDataObject.type";
+import { loginPageDataObject } from "../../DataObject/sauceDemo/loginPageDataObject.type";
 
 export const invalidUserData = (): loginPageDataObject[] => {
     return [

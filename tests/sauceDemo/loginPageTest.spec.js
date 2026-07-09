@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
-import { LoginPagePOM } from '../../POM/LoginPOM.spec';
-import HomePagePOM from '../../POM/HomePOM.spec';
-import { userNameMissing, invalidUserData, passwordMissing, loginWithValidUser } from '../../DataFactory/loginData.factory';
+import { LoginPagePOM } from '../../POM/sauceDemo/LoginPOM.spec';
+import HomePagePOM from '../../POM/sauceDemo/HomePOM.spec';
+import { userNameMissing, invalidUserData, passwordMissing, loginWithValidUser } from '../../DataFactory/sauceDemo/loginData.factory';
 
 
 test('login with blank user', async ({ page }) => {
