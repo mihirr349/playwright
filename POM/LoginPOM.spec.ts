@@ -13,7 +13,7 @@ export class LoginPagePOM {
     }
 
     // Dynamic Locators
-    readonly errorMsg = (message: string | RegExp) => this.page.getByText(message);
+    readonly errorMsg = (message: string) => this.page.getByText(message);
 
     // Action method
     enterUserName = async (name: string) => await this.userName.fill(name);

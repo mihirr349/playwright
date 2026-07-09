@@ -1,4 +1,4 @@
-import {Locator, Page} from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 class HomePagePOM {
 
@@ -13,14 +13,12 @@ class HomePagePOM {
         this.productTitle = this.page.getByText('Products');
         this.filterProduct = this.page.getByRole('combobox');
         this.cartLogo = this.page.locator("//a[@class = 'shopping_cart_link']");
-        this.menuIcon = this.page.getByRole('button', {name: 'Open Menu'});
-        this.logoutLink = this.page.getByRole('link', {name: 'Logout'});
+        this.menuIcon = this.page.getByRole('button', { name: 'Open Menu' });
+        this.logoutLink = this.page.getByRole('link', { name: 'Logout' });
     }
 
     // Dynamic Locators
-    addToCartBtn(product: string) {
-        return this.page.locator(`//div[text() = '${product}']/ancestor::div[@class = 'inventory_item_description']//button[text() = 'Add to cart']`);
-    }
+    readonly addToCartBtn = (product: string) => this.page.locator(`//div[text() = '${product}']/ancestor::div[@class = 'inventory_item_description']//button[text() = 'Add to cart']`);
 
     // Action Methods
     filterProductsByValue = async (value: string) => await this.filterProduct.selectOption(value);
