@@ -1,8 +1,8 @@
-import { test } from "@playwright/test";
-import { PracticeFormPOM } from "../../POM/demoQa/PracticeFormPOM.spec";
+import {test} from "@playwright/test";
+import {PracticeFormPOM} from "../../POM/demoQa/PracticeFormPOM.spec";
 import {validUser} from "../../DataFactory/demoQa/practiceForm.factory";
 
-test('fill the form', async ({ page }) => {
+test('fill the form', async ({page}) => {
 
     // Navigate to site
     await page.goto('https://demoqa.com/automation-practice-form');
@@ -26,6 +26,4 @@ test('fill the form', async ({ page }) => {
     await practiceForm.selectState(user.state);
     await practiceForm.selectCity(user.city);
     await practiceForm.clickOnSubmitBtn();
-
-    await page.pause();
 });

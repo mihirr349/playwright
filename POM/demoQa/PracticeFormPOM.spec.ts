@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import {Locator, Page} from "@playwright/test";
 
 export class PracticeFormPOM {
     readonly firstName: Locator;
@@ -15,24 +15,24 @@ export class PracticeFormPOM {
 
     // Locators
     constructor(private page: Page) {
-        this.firstName = page.getByRole('textbox', { name: 'First Name' });
-        this.lastName = page.getByRole('textbox', { name: 'Last Name' });
-        this.emailInput = page.getByRole('textbox', { name: 'name@example.com' });
-        this.mobileNumber = page.getByRole('textbox', { name: 'Mobile Number' });
+        this.firstName = page.getByRole('textbox', {name: 'First Name'});
+        this.lastName = page.getByRole('textbox', {name: 'Last Name'});
+        this.emailInput = page.getByRole('textbox', {name: 'name@example.com'});
+        this.mobileNumber = page.getByRole('textbox', {name: 'Mobile Number'});
         this.dobInput = page.locator('#dateOfBirthInput');
         this.subjectsInput = page.locator('#subjectsInput');
-        this.picture = page.getByRole('button', { name: 'Choose File' });
-        this.currentAddressInput = page.getByRole('textbox', { name: 'Current Address' });
+        this.picture = page.getByRole('button', {name: 'Choose File'});
+        this.currentAddressInput = page.getByRole('textbox', {name: 'Current Address'});
         this.stateDropdown = page.locator("//div[@id = 'state']//input[@id = 'react-select-3-input']/parent::div");
         this.cityDropdown = page.locator("//div[@id = 'city']//input[@id = 'react-select-4-input']/parent::div");
-        this.submitBtn = page.getByRole('button', { name: 'Submit' });
+        this.submitBtn = page.getByRole('button', {name: 'Submit'});
     }
 
     // Dynamic Locators
-    readonly genderRadioBtn = (gender: string) => this.page.getByRole('radio', { name: gender, exact: true });
-    readonly hobbiesCheckbox = (hobby: string) => this.page.getByRole('checkbox', { name: hobby });
-    readonly stateOption = (state: string) => this.page.getByRole('option', { name: state });
-    readonly cityOption = (city: string) => this.page.getByRole('option', { name: city });
+    readonly genderRadioBtn = (gender: string) => this.page.getByRole('radio', {name: gender, exact: true});
+    readonly hobbiesCheckbox = (hobby: string) => this.page.getByRole('checkbox', {name: hobby});
+    readonly stateOption = (state: string) => this.page.getByRole('option', {name: state});
+    readonly cityOption = (city: string) => this.page.getByRole('option', {name: city});
 
     // Actions
     enterFirstName = async (firstName: string) => await this.firstName.fill(firstName);
@@ -43,8 +43,8 @@ export class PracticeFormPOM {
     enterDOB = async (dob: string) => {
         await this.dobInput.evaluate((el: HTMLInputElement, val) => {
             el.value = val;
-            el.dispatchEvent(new Event('input', { bubbles: true }));
-            el.dispatchEvent(new Event('change', { bubbles: true }));
+            el.dispatchEvent(new Event('input', {bubbles: true}));
+            el.dispatchEvent(new Event('change', {bubbles: true}));
         }, dob);
     };
 

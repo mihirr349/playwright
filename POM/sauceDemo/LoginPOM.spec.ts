@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import {Locator, Page} from "@playwright/test";
 
 export class LoginPagePOM {
     readonly userName: Locator;
@@ -7,9 +7,9 @@ export class LoginPagePOM {
 
     // Locators
     constructor(private page: Page) {
-        this.userName = page.getByRole('textbox', { name: 'Username' });
-        this.password = page.getByRole('textbox', { name: 'Password' });
-        this.loginButton = page.getByRole('button', { name: 'Login' });
+        this.userName = page.getByRole('textbox', {name: 'Username'});
+        this.password = page.getByRole('textbox', {name: 'Password'});
+        this.loginButton = page.getByRole('button', {name: 'Login'});
     }
 
     // Dynamic Locators

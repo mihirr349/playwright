@@ -1,4 +1,3 @@
-
 export interface loginPageDataObject {
     readonly userName: string;
     readonly password: string;

@@ -1,10 +1,15 @@
-import { test, expect } from '@playwright/test';
-import { LoginPagePOM } from '../../POM/sauceDemo/LoginPOM.spec';
+import {test, expect} from '@playwright/test';
+import {LoginPagePOM} from '../../POM/sauceDemo/LoginPOM.spec';
 import HomePagePOM from '../../POM/sauceDemo/HomePOM.spec';
-import { userNameMissing, invalidUserData, passwordMissing, loginWithValidUser } from '../../DataFactory/sauceDemo/loginData.factory';
+import {
+    userNameMissing,
+    invalidUserData,
+    passwordMissing,
+    loginWithValidUser
+} from '../../DataFactory/sauceDemo/loginData.factory';
 
 
-test('login with blank user', async ({ page }) => {
+test('login with blank user', async ({page}) => {
 
     // Initialize POM
     const loginPage = new LoginPagePOM(page);
@@ -18,7 +23,7 @@ test('login with blank user', async ({ page }) => {
     await expect(loginPage.errorMsg('Epic sadface: Username is required')).toBeVisible();
 })
 
-test('verify when userName is empty', async ({ page }) => {
+test('verify when userName is empty', async ({page}) => {
 
     // Initialize POM
     const loginPage = new LoginPagePOM(page);
@@ -35,7 +40,7 @@ test('verify when userName is empty', async ({ page }) => {
     await expect(loginPage.errorMsg(formData.errorMsg)).toBeVisible();
 })
 
-test('login invalid user', async ({ page }) => {
+test('login invalid user', async ({page}) => {
 
     // Initialize POM
     const loginPage = new LoginPagePOM(page);
@@ -52,7 +57,7 @@ test('login invalid user', async ({ page }) => {
     await expect(loginPage.errorMsg(formData.errorMsg)).toBeVisible();
 })
 
-test('Verify when password is empty', async ({ page }) => {
+test('Verify when password is empty', async ({page}) => {
 
     // Initialize POM
     const loginPage = new LoginPagePOM(page);
@@ -69,7 +74,7 @@ test('Verify when password is empty', async ({ page }) => {
     await expect(loginPage.errorMsg(formData.errorMsg)).toBeVisible();
 })
 
-test('Verify login with valid user', async ({ page }) => {
+test('Verify login with valid user', async ({page}) => {
 
     // Initialize POM
     const loginPage = new LoginPagePOM(page);
