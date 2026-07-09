@@ -48,11 +48,19 @@ export class PracticeFormPOM {
         }, dob);
     };
 
-    enterSubject = async (subject: string) => {
-        await this.subjectsInput.fill(subject);
-        await this.subjectsInput.press('Enter');
+    enterSubject = async (...subjects: string[]) => {
+        for (const subject of subjects) {
+            await this.subjectsInput.fill(subject);
+            await this.subjectsInput.press('Enter');
+        }
     };
-    selectHobbies = async (hobby: string) => await this.hobbiesCheckbox(hobby).click();
+
+    selectHobbies = async (...hobbies: string[]) => {
+        for (const hobby of hobbies) {
+            await this.hobbiesCheckbox(hobby).click();
+        }
+    };
+
     uploadPicture = async (filePath: string) => await this.picture.setInputFiles(filePath);
     enterCurrentAddress = async (address: string) => await this.currentAddressInput.fill(address);
 
