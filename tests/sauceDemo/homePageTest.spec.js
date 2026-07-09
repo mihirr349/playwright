@@ -1,7 +1,7 @@
-import { test, expect } from '@playwright/test';
-import { LoginPagePOM } from '../../POM/LoginPOM.spec';
-import { HomePagePOM } from '../../POM/HomePOM.spec';
-import { loginWithValidUser } from '../../DataFactory/loginData.factory';
+import {test, expect} from '@playwright/test';
+import {LoginPagePOM} from '../../POM/LoginPOM.spec';
+import HomePagePOM from '../../POM/HomePOM.spec';
+import {loginWithValidUser} from '../../DataFactory/loginData.factory';
 
 async function loginToApplication(page) {
 
@@ -21,7 +21,7 @@ async function loginToApplication(page) {
     await expect(homePage.productTitle).toBeVisible();
 }
 
-test('add to cart product', async ({ page }) => {
+test('add to cart product', async ({page}) => {
 
     await loginToApplication(page);
 
@@ -36,8 +36,27 @@ test('add to cart product', async ({ page }) => {
     ];
 
     for (const product of products) {
-        await homePage.addToCartBtn(product).click();
+        await homePage.clickOnAddToCartBtn(product);
     }
-    await page.pause();
+})
 
+test('Filter products by price low to high', async ({page}) => {
+
+    await loginToApplication(page);
+
+    // Initialize POM
+    const homePage = new HomePagePOM(page);
+
+    await homePage.filterProductsByValue('lohi');
+})
+
+test('logout user', async ({page}) => {
+
+    await loginToApplication(page);
+
+    // Initialize POM
+    const homePage = new HomePagePOM(page);
+
+    await homePage.clickOnMenuIcon();
+    await homePage.clickOnLogoutLink();
 })

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPagePOM } from '../../POM/LoginPOM.spec';
-import { HomePagePOM } from '../../POM/HomePOM.spec';
+import HomePagePOM from '../../POM/HomePOM.spec';
 import { userNameMissing, invalidUserData, passwordMissing, loginWithValidUser } from '../../DataFactory/loginData.factory';
 
 
@@ -16,7 +16,6 @@ test('login with blank user', async ({ page }) => {
 
     // Assertions
     await expect(loginPage.errorMsg('Epic sadface: Username is required')).toBeVisible();
-
 })
 
 test('verify when userName is empty', async ({ page }) => {
@@ -70,7 +69,7 @@ test('Verify when password is empty', async ({ page }) => {
     await expect(loginPage.errorMsg(formData.errorMsg)).toBeVisible();
 })
 
-test.only('Verify login with valid user', async ({ page }) => {
+test('Verify login with valid user', async ({ page }) => {
 
     // Initialize POM
     const loginPage = new LoginPagePOM(page);
@@ -86,5 +85,4 @@ test.only('Verify login with valid user', async ({ page }) => {
     await loginPage.clickLoginButton();
 
     await expect(homePage.productTitle).toBeVisible();
-
 })
