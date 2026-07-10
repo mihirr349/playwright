@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
 import {LoginPagePOM} from '../../POM/sauceDemo/LoginPOM.spec';
-import HomePagePOM from '../../POM/sauceDemo/HomePOM.spec';
+import {HomePagePOM} from '../../POM/sauceDemo/HomePOM.spec';
 import {loginWithValidUser} from '../../DataFactory/sauceDemo/loginData.factory';
 
 async function loginToApplication(page) {

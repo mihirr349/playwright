@@ -1,4 +1,5 @@
 import {Locator, Page} from "@playwright/test";
+import {getUploadFilePath} from "../../utility/FilePathHelper";
 
 export class PracticeFormPOM {
     readonly firstName: Locator;
@@ -39,7 +40,8 @@ export class PracticeFormPOM {
     enterLastName = async (lastName: string) => await this.lastName.fill(lastName);
     enterEmail = async (email: string) => await this.emailInput.fill(email);
     selectGender = async (gender: string) => await this.genderRadioBtn(gender).check();
-    enterMobileNumber = async (number: string) => await this.mobileNumber.fill(number);
+    enterMobileNumber = async (mobileNumber: string) => await this.mobileNumber.fill(mobileNumber);
+
     enterDOB = async (dob: string) => {
         await this.dobInput.evaluate((el: HTMLInputElement, val) => {
             el.value = val;
@@ -48,21 +50,21 @@ export class PracticeFormPOM {
         }, dob);
     };
 
-    enterSubject = async (...subjects: string[]) => {
+    enterSubject = async (subjects: string[]) => {
         for (const subject of subjects) {
             await this.subjectsInput.fill(subject);
             await this.subjectsInput.press('Enter');
         }
     };
 
-    selectHobbies = async (...hobbies: string[]) => {
+    selectHobbies = async (hobbies: string[]) => {
         for (const hobby of hobbies) {
             await this.hobbiesCheckbox(hobby).click();
         }
     };
 
-    uploadPicture = async (filePath: string) => await this.picture.setInputFiles(filePath);
-    enterCurrentAddress = async (address: string) => await this.currentAddressInput.fill(address);
+    uploadPicture = async (fileName: string) => await this.picture.setInputFiles(getUploadFilePath(fileName));
+    enterCurrentAddress = async (currentAddress: string) => await this.currentAddressInput.fill(currentAddress);
 
     selectState = async (state: string) => {
         await this.stateDropdown.click();

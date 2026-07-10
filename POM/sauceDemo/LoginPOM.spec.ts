@@ -19,5 +19,4 @@ export class LoginPagePOM {
     enterUserName = async (name: string) => await this.userName.fill(name);
     enterPassword = async (password: string) => await this.password.fill(password);
     clickLoginButton = async () => await this.loginButton.click();
-
 }

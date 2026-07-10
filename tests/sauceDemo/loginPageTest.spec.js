@@ -8,7 +8,6 @@ import {
     loginWithValidUser
 } from '../../DataFactory/sauceDemo/loginData.factory';
 
-
 test('login with blank user', async ({page}) => {
 
     // Initialize POM

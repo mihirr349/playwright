@@ -1,6 +1,6 @@
 import {Locator, Page} from "@playwright/test";
 
-class HomePagePOM {
+export class HomePagePOM {
 
     // Locators
     readonly productTitle: Locator;
@@ -28,6 +28,6 @@ class HomePagePOM {
     clickOnLogoutLink = async () => await this.logoutLink.click();
 
     clickOnAddToCartBtn = async (product: string) => await this.addToCartBtn(product).click();
-}
 
-export default HomePagePOM
+    clickOnCartLogo = async () => await this.cartLogo.click();
+}
