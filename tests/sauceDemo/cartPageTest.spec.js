@@ -3,6 +3,7 @@ import {CartPagePOM} from "../../POM/sauceDemo/CartPOM.spec";
 import {LoginPagePOM} from "../../POM/sauceDemo/LoginPOM.spec";
 import {HomePagePOM} from "../../POM/sauceDemo/HomePOM.spec";
 import {loginWithValidUser} from "../../DataFactory/sauceDemo/loginData.factory";
+import {validProduct} from "../../DataFactory/sauceDemo/productData.factory";
 
 async function addProductsIntoCart(page) {
 
@@ -22,11 +23,7 @@ async function addProductsIntoCart(page) {
     await loginPage.clickLoginButton();
 
     // Add products to cart
-    const products = [
-        'Sauce Labs Backpack',
-        'Sauce Labs Bike Light',
-        'Sauce Labs Bolt T-Shirt'
-    ];
+    const products = validProduct()[0].addToCartProducts;
 
     for (const product of products) {
         await homePage.clickOnAddToCartBtn(product);
@@ -45,3 +42,31 @@ test('verify cart title', async ({page}) => {
 
     await cartPages.verifyCartTitle();
 });
+
+test('verify cart items', async ({page}) => {
+
+    // Initialize POM
+    const cartPages = new CartPagePOM(page);
+
+    // login to application
+    await addProductsIntoCart(page);
+
+    // get product data from data factory
+    const addedProducts = validProduct()[0].addToCartProducts;
+    const removedItems = validProduct()[0].removedProducts;
+
+    // verify cart items
+    for (const product of addedProducts) {
+        await cartPages.verifyCartItems(product);
+    }
+
+    // remove items
+    for (const product of removedItems) {
+        await cartPages.clickOnRemoveItemBtn(product);
+    }
+
+    // verify remove cart item
+    for (const product of removedItems) {
+        await cartPages.verifyRemovedItems(product);
+    }
+})
