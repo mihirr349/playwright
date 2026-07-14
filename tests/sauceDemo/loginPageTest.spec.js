@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
-import {LoginPagePOM} from '../../POM/sauceDemo/LoginPOM.spec';
-import {HomePagePOM} from '../../POM/sauceDemo/HomePOM.spec';
+import {LoginPagePOM} from '../../POM/sauceDemo/LoginPOM';
+import {HomePagePOM} from '../../POM/sauceDemo/HomePOM';
 import {
     userNameMissing,
     invalidUserData,
@@ -27,7 +27,7 @@ test('verify when userName is empty', async ({page}) => {
     // Initialize POM
     const loginPage = new LoginPagePOM(page);
 
-    const formData = userNameMissing()[0];
+    const formData = userNameMissing();
 
     await page.goto('https://www.saucedemo.com/');
 
@@ -44,7 +44,7 @@ test('login invalid user', async ({page}) => {
     // Initialize POM
     const loginPage = new LoginPagePOM(page);
 
-    const formData = invalidUserData()[0];
+    const formData = invalidUserData();
 
     await page.goto('https://www.saucedemo.com/');
 
@@ -61,7 +61,7 @@ test('Verify when password is empty', async ({page}) => {
     // Initialize POM
     const loginPage = new LoginPagePOM(page);
 
-    const formData = passwordMissing()[0];
+    const formData = passwordMissing();
 
     await page.goto('https://www.saucedemo.com/');
 
@@ -79,7 +79,7 @@ test('Verify login with valid user', async ({page}) => {
     const loginPage = new LoginPagePOM(page);
     const homePage = new HomePagePOM(page);
 
-    const formData = loginWithValidUser()[0];
+    const formData = loginWithValidUser();
 
     await page.goto('https://www.saucedemo.com/');
 

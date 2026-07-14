@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
-import {LoginPagePOM} from '../../POM/sauceDemo/LoginPOM.spec';
-import {HomePagePOM} from '../../POM/sauceDemo/HomePOM.spec';
+import {LoginPagePOM} from '../../POM/sauceDemo/LoginPOM';
+import {HomePagePOM} from '../../POM/sauceDemo/HomePOM';
 import {loginWithValidUser} from '../../DataFactory/sauceDemo/loginData.factory';
 
 async function loginToApplication(page) {
@@ -9,7 +9,7 @@ async function loginToApplication(page) {
     const loginPage = new LoginPagePOM(page);
     const homePage = new HomePagePOM(page);
 
-    const formData = loginWithValidUser()[0];
+    const formData = loginWithValidUser();
 
     await page.goto('https://www.saucedemo.com/');
 

@@ -1,9 +1,10 @@
 import {test} from "playwright/test";
-import {CartPagePOM} from "../../POM/sauceDemo/CartPOM.spec";
-import {LoginPagePOM} from "../../POM/sauceDemo/LoginPOM.spec";
-import {HomePagePOM} from "../../POM/sauceDemo/HomePOM.spec";
+import {CartPagePOM} from "../../POM/sauceDemo/CartPOM";
+import {LoginPagePOM} from "../../POM/sauceDemo/LoginPOM";
+import {HomePagePOM} from "../../POM/sauceDemo/HomePOM";
 import {loginWithValidUser} from "../../DataFactory/sauceDemo/loginData.factory";
 import {validProduct} from "../../DataFactory/sauceDemo/productData.factory";
+import {CheckoutPOM} from "../../POM/sauceDemo/CheckoutPOM";
 
 async function addProductsIntoCart(page) {
 
@@ -12,7 +13,7 @@ async function addProductsIntoCart(page) {
     const homePage = new HomePagePOM(page);
 
     // Initialize Data Factory
-    const loginData = loginWithValidUser()[0];
+    const loginData = loginWithValidUser();
 
     // Redirect to URL
     await page.goto('https://www.saucedemo.com/');
@@ -23,7 +24,10 @@ async function addProductsIntoCart(page) {
     await loginPage.clickLoginButton();
 
     // Add products to cart
-    const products = validProduct()[0].addToCartProducts;
+    const products = validProduct().addToCartProducts;
+
+    // verify Product title
+    await homePage.verifyProductTitle();
 
     for (const product of products) {
         await homePage.clickOnAddToCartBtn(product);
@@ -52,8 +56,8 @@ test('verify cart items', async ({page}) => {
     await addProductsIntoCart(page);
 
     // get product data from data factory
-    const addedProducts = validProduct()[0].addToCartProducts;
-    const removedItems = validProduct()[0].removedProducts;
+    const addedProducts = validProduct().addToCartProducts;
+    const removedItems = validProduct().removedProducts;
 
     // verify cart items
     for (const product of addedProducts) {
@@ -69,4 +73,51 @@ test('verify cart items', async ({page}) => {
     for (const product of removedItems) {
         await cartPages.verifyRemovedItems(product);
     }
+})
+
+test('verify to click on continue shopping button', async ({page}) => {
+
+    // Initialize POM
+    const homePage = new HomePagePOM(page);
+    const cartPages = new CartPagePOM(page);
+
+    // login to application
+    await addProductsIntoCart(page);
+
+    await cartPages.verifyCartTitle();
+
+    // get product data from data factory
+    const products = validProduct().addToCartProducts;
+
+    // verify cart items
+    for (const product of products) {
+        await cartPages.verifyCartItems(product);
+    }
+
+    await cartPages.clickOnContinueShoppingBtn();
+
+    await homePage.verifyProductTitle();
+})
+
+test.only('click On Checkout button', async ({page}) => {
+
+    // Initialize POM
+    const cartPages = new CartPagePOM(page);
+    const checkoutPage = new CheckoutPOM(page);
+
+    // login and add to cart product
+    await addProductsIntoCart(page);
+
+    await cartPages.verifyCartTitle();
+
+    // get product data from data factory
+    const products = validProduct().addToCartProducts;
+
+    for (const product of products) {
+        await cartPages.verifyCartItems(product);
+    }
+
+    await cartPages.clickOnCheckoutBtn();
+
+    await checkoutPage.verifyCheckoutTitle();
 })

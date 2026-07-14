@@ -1,4 +1,4 @@
-import {Locator, Page} from "@playwright/test";
+import {expect, Locator, Page} from "@playwright/test";
 
 export class HomePagePOM {
 
@@ -21,6 +21,8 @@ export class HomePagePOM {
     readonly addToCartBtn = (product: string) => this.page.locator(`//div[text() = '${product}']/ancestor::div[@class = 'inventory_item_description']//button[text() = 'Add to cart']`);
 
     // Action Methods
+    verifyProductTitle = () => expect(this.productTitle).toBeVisible();
+
     filterProductsByValue = async (value: string) => await this.filterProduct.selectOption(value);
 
     clickOnMenuIcon = async () => await this.menuIcon.click();
