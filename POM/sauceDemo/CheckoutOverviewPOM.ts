@@ -4,12 +4,16 @@ export class CheckoutOverviewPOM {
     readonly overviewTitle: Locator;
     readonly cancelBtn: Locator;
     readonly finishBtn: Locator;
+    readonly checkoutCompleteTitle: Locator;
+    readonly backHomeBtn: Locator;
 
     // Locators
     constructor(private page: Page) {
         this.overviewTitle = page.getByText('Checkout: Overview');
         this.cancelBtn = page.getByRole('button', {name: 'Go back Cancel'});
         this.finishBtn = page.getByRole('button', {name: 'Finish'});
+        this.checkoutCompleteTitle = page.getByText('Checkout: Complete!');
+        this.backHomeBtn = page.getByRole('button', {name: 'Back Home'});
     }
 
     // Dynamic locators
@@ -20,4 +24,6 @@ export class CheckoutOverviewPOM {
     verifyProduct = async (productName: string) => expect(await this.product(productName)).toBeVisible();
     clickOnCancelBtn = () => this.cancelBtn.click();
     clickOnFinishBtn = () => this.finishBtn.click();
+    verifyCheckoutCompleteTitle = () => expect(this.checkoutCompleteTitle).toBeVisible();
+    clickOnBackHomeBtn = () => this.backHomeBtn.click();
 }

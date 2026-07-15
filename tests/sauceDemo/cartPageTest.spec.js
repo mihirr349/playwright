@@ -99,7 +99,7 @@ test('verify to click on continue shopping button', async ({page}) => {
     await homePage.verifyProductTitle();
 })
 
-test.only('click On Checkout button', async ({page}) => {
+test('click On Checkout button', async ({page}) => {
 
     // Initialize POM
     const cartPages = new CartPagePOM(page);

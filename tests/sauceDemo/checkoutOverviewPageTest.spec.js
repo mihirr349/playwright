@@ -74,3 +74,75 @@ test('verify products', async ({page}) => {
         await checkoutOverviewPage.verifyProduct(product);
     }
 })
+
+test('verify to click on Cancel button', async ({page}) => {
+
+    // login to application and navigate to checkout overview page
+    await loginToApplication(page);
+    await navigateToCheckoutOverviewPage(page);
+
+    // initiate POM
+    const homePage = new HomePagePOM(page);
+    const checkoutOverviewPage = new CheckoutOverviewPOM(page);
+
+    await checkoutOverviewPage.verifyOverviewTitle();
+
+    // get product data from data factory
+    const products = validProduct().addToCartProducts;
+
+    for (const product of products) {
+        await checkoutOverviewPage.verifyProduct(product);
+    }
+
+    await checkoutOverviewPage.clickOnCancelBtn();
+    await homePage.verifyProductTitle();
+})
+
+test('verify to click on Finish button', async ({page}) => {
+
+    // login to application and navigate to checkout overview page
+    await loginToApplication(page);
+    await navigateToCheckoutOverviewPage(page);
+
+    // initiate POM
+    const homePage = new HomePagePOM(page);
+    const checkoutOverviewPage = new CheckoutOverviewPOM(page);
+
+    await checkoutOverviewPage.verifyOverviewTitle();
+
+    // get product data from data factory
+    const products = validProduct().addToCartProducts;
+
+    for (const product of products) {
+        await checkoutOverviewPage.verifyProduct(product);
+    }
+
+    await checkoutOverviewPage.clickOnFinishBtn();
+
+    await checkoutOverviewPage.verifyCheckoutCompleteTitle();
+})
+
+test('verify to click on Back Home button', async ({page}) => {
+
+    // login to application and navigate to checkout overview page
+    await loginToApplication(page);
+    await navigateToCheckoutOverviewPage(page);
+
+    // initiate POM
+    const homePage = new HomePagePOM(page);
+    const checkoutOverviewPage = new CheckoutOverviewPOM(page);
+
+    await checkoutOverviewPage.verifyOverviewTitle();
+
+    // get product data from data factory
+    const products = validProduct().addToCartProducts;
+
+    for (const product of products) {
+        await checkoutOverviewPage.verifyProduct(product);
+    }
+
+    await checkoutOverviewPage.clickOnFinishBtn();
+    await checkoutOverviewPage.verifyCheckoutCompleteTitle();
+    await checkoutOverviewPage.clickOnBackHomeBtn();
+    await homePage.verifyProductTitle();
+})

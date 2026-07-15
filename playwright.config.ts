@@ -1,25 +1,23 @@
-import { defineConfig } from '@playwright/test';
+import {defineConfig} from '@playwright/test';
 
 export default defineConfig({
-  testDir: './tests',
+    testDir: './tests',
 
-  /* Run tests in files in parallel */
-  fullyParallel: false,
+    /* Run tests in files in parallel */
+    fullyParallel: false,
 
-  /* Maximum time one test can run for. */
-  timeout: 30 * 1000,
-  expect: {
-    timeout: 5000,
-  },
+    /* Maximum time one test can run for. */
+    timeout: 30 * 1000,
+    expect: {
+        timeout: 5000,
+    },
 
-  reporter: 'html',
+    reporter: 'html',
 
-  use: {
-
-    browserName: 'chromium',
-    headless: true,
-    trace: 'on-first-retry',
-  },
-
+    use: {
+        browserName: 'chromium',
+        headless: true,
+        trace: 'on-first-retry',
+    },
 
 });

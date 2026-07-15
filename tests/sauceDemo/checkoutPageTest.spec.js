@@ -137,7 +137,7 @@ test('verify to click on Cancel button', async ({page}) => {
     await cartPage.verifyCartTitle();
 })
 
-test.only('verify enter all the valid data', async ({page}) => {
+test('verify enter all the valid data', async ({page}) => {
 
     // login to application and navigate to checkout page
     await loginToApplication(page);

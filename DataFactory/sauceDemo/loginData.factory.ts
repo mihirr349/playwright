@@ -4,7 +4,7 @@ export const invalidUserData = (): loginPageDataObject => {
     return {
         userName: "John",
         password: "Doe",
-        errorMsg: "12345"
+        errorMsg: "Epic sadface: Username and password do not match any user in this service"
     }
 }
 
