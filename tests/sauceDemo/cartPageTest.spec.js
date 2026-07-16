@@ -1,27 +1,15 @@
 import {test} from "playwright/test";
 import {CartPagePOM} from "../../POM/sauceDemo/CartPOM";
-import {LoginPagePOM} from "../../POM/sauceDemo/LoginPOM";
 import {HomePagePOM} from "../../POM/sauceDemo/HomePOM";
-import {loginWithValidUser} from "../../DataFactory/sauceDemo/loginData.factory";
 import {validProduct} from "../../DataFactory/sauceDemo/productData.factory";
 import {CheckoutPOM} from "../../POM/sauceDemo/CheckoutPOM";
 
 async function addProductsIntoCart(page) {
 
     // Initialize POM
-    const loginPage = new LoginPagePOM(page);
     const homePage = new HomePagePOM(page);
 
-    // Initialize Data Factory
-    const loginData = loginWithValidUser();
-
-    // Redirect to URL
-    await page.goto('https://www.saucedemo.com/');
-
-    // login to Application
-    await loginPage.enterUserName(loginData.userName);
-    await loginPage.enterPassword(loginData.password);
-    await loginPage.clickLoginButton();
+    await page.goto('https://www.saucedemo.com/inventory.html');
 
     // Add products to cart
     const products = validProduct().addToCartProducts;

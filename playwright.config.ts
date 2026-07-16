@@ -1,4 +1,5 @@
 import {defineConfig} from '@playwright/test';
+import {getAuthFilePath, getAuthSetupFilePath} from "./utility/FilePathHelper";
 
 export default defineConfig({
     testDir: './tests',
@@ -20,4 +21,19 @@ export default defineConfig({
         trace: 'on-first-retry',
     },
 
+    projects: [
+        {
+            name: 'setup',
+            testDir: './',
+            testMatch: getAuthSetupFilePath(),
+        },
+        {
+            name: 'chromium',
+            use: {
+                browserName: 'chromium',
+                storageState: getAuthFilePath('user'),
+            },
+            dependencies: ['setup'],
+        },
+    ],
 });

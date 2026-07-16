@@ -1,6 +1,4 @@
 import {test} from "@playwright/test";
-import {LoginPagePOM} from "../../POM/sauceDemo/LoginPOM";
-import {loginWithValidUser} from "../../DataFactory/sauceDemo/loginData.factory";
 import {HomePagePOM} from "../../POM/sauceDemo/HomePOM";
 import {validProduct} from "../../DataFactory/sauceDemo/productData.factory";
 import {CartPagePOM} from "../../POM/sauceDemo/CartPOM";
@@ -8,23 +6,9 @@ import {CheckoutPOM} from "../../POM/sauceDemo/CheckoutPOM";
 import {RandomDataGenerator} from "../../utility/RandomDataGenerator";
 import {CheckoutOverviewPOM} from "../../POM/sauceDemo/CheckoutOverviewPOM";
 
-async function loginToApplication(page) {
-
-    // redirect to URL
-    await page.goto('https://www.saucedemo.com/');
-
-    // Initiate POM
-    const loginPage = new LoginPagePOM(page);
-
-    // Initialize Data Factory
-    const loginData = loginWithValidUser();
-    await loginPage.enterUserName(loginData.userName);
-    await loginPage.enterPassword(loginData.password);
-    await loginPage.clickLoginButton();
-}
-
 async function navigateToCheckout(page) {
 
+    await page.goto('https://www.saucedemo.com/inventory.html');
     // Initiate POM
     const homePage = new HomePagePOM(page);
     const cartPage = new CartPagePOM(page);
@@ -51,7 +35,6 @@ async function navigateToCheckout(page) {
 test('verify when all the field is blank', async ({page}) => {
 
     // login to application and navigate to checkout page
-    await loginToApplication(page);
     await navigateToCheckout(page);
 
     // Initiate POM
@@ -66,7 +49,6 @@ test('verify when all the field is blank', async ({page}) => {
 test('verify when first name is blank', async ({page}) => {
 
     // login to application and navigate to checkout page
-    await loginToApplication(page);
     await navigateToCheckout(page);
 
     // Initiate POM
@@ -85,7 +67,6 @@ test('verify when first name is blank', async ({page}) => {
 test('verify when last name is blank', async ({page}) => {
 
     // login to application and navigate to checkout page
-    await loginToApplication(page);
     await navigateToCheckout(page);
 
     // Initiate POM
@@ -104,7 +85,6 @@ test('verify when last name is blank', async ({page}) => {
 test('verify when zipcode is blank', async ({page}) => {
 
     // login to application and navigate to checkout page
-    await loginToApplication(page);
     await navigateToCheckout(page);
 
     // Initiate POM
@@ -123,7 +103,6 @@ test('verify when zipcode is blank', async ({page}) => {
 test('verify to click on Cancel button', async ({page}) => {
 
     // login to application and navigate to checkout page
-    await loginToApplication(page);
     await navigateToCheckout(page);
 
     // Initiate POM
@@ -140,7 +119,6 @@ test('verify to click on Cancel button', async ({page}) => {
 test('verify enter all the valid data', async ({page}) => {
 
     // login to application and navigate to checkout page
-    await loginToApplication(page);
     await navigateToCheckout(page);
 
     // Initiate POM

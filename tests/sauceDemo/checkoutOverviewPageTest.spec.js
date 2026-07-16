@@ -1,6 +1,4 @@
 import {test} from "@playwright/test";
-import {LoginPagePOM} from "../../POM/sauceDemo/LoginPOM";
-import {loginWithValidUser} from "../../DataFactory/sauceDemo/loginData.factory";
 import {HomePagePOM} from "../../POM/sauceDemo/HomePOM";
 import {validProduct} from "../../DataFactory/sauceDemo/productData.factory";
 import {CartPagePOM} from "../../POM/sauceDemo/CartPOM";
@@ -8,24 +6,9 @@ import {checkoutData} from "../../DataFactory/sauceDemo/checkoutData.factory";
 import {CheckoutPOM} from "../../POM/sauceDemo/CheckoutPOM";
 import {CheckoutOverviewPOM} from "../../POM/sauceDemo/CheckoutOverviewPOM";
 
-async function loginToApplication(page) {
-
-    // Navigate to URL
-    await page.goto('https://www.saucedemo.com/');
-
-    // Initiate POM
-    const loginPage = new LoginPagePOM(page);
-
-    // get data from data factory
-    const user = loginWithValidUser();
-
-    // login
-    await loginPage.enterUserName(user.userName);
-    await loginPage.enterPassword(user.password);
-    await loginPage.clickLoginButton();
-}
-
 async function navigateToCheckoutOverviewPage(page) {
+
+    await page.goto('https://www.saucedemo.com/inventory.html');
 
     // Initiate POM
     const homePage = new HomePagePOM(page);
@@ -59,7 +42,6 @@ async function navigateToCheckoutOverviewPage(page) {
 test('verify products', async ({page}) => {
 
     // login to application and navigate to checkout overview page
-    await loginToApplication(page);
     await navigateToCheckoutOverviewPage(page);
 
     // initiate POM
@@ -78,7 +60,6 @@ test('verify products', async ({page}) => {
 test('verify to click on Cancel button', async ({page}) => {
 
     // login to application and navigate to checkout overview page
-    await loginToApplication(page);
     await navigateToCheckoutOverviewPage(page);
 
     // initiate POM
@@ -101,11 +82,9 @@ test('verify to click on Cancel button', async ({page}) => {
 test('verify to click on Finish button', async ({page}) => {
 
     // login to application and navigate to checkout overview page
-    await loginToApplication(page);
     await navigateToCheckoutOverviewPage(page);
 
     // initiate POM
-    const homePage = new HomePagePOM(page);
     const checkoutOverviewPage = new CheckoutOverviewPOM(page);
 
     await checkoutOverviewPage.verifyOverviewTitle();
@@ -125,7 +104,6 @@ test('verify to click on Finish button', async ({page}) => {
 test('verify to click on Back Home button', async ({page}) => {
 
     // login to application and navigate to checkout overview page
-    await loginToApplication(page);
     await navigateToCheckoutOverviewPage(page);
 
     // initiate POM

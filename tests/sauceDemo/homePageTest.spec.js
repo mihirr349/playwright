@@ -1,29 +1,9 @@
-import {test, expect} from '@playwright/test';
-import {LoginPagePOM} from '../../POM/sauceDemo/LoginPOM';
-import {HomePagePOM} from '../../POM/sauceDemo/HomePOM';
-import {loginWithValidUser} from '../../DataFactory/sauceDemo/loginData.factory';
+import { test } from '@playwright/test';
+import { HomePagePOM } from '../../POM/sauceDemo/HomePOM';
 
-async function loginToApplication(page) {
+test('add to cart product', async ({ page }) => {
 
-    // Initialize POM
-    const loginPage = new LoginPagePOM(page);
-    const homePage = new HomePagePOM(page);
-
-    const formData = loginWithValidUser();
-
-    await page.goto('https://www.saucedemo.com/');
-
-    await loginPage.enterUserName(formData.userName);
-    await loginPage.enterPassword(formData.password);
-
-    await loginPage.clickLoginButton();
-
-    await expect(homePage.productTitle).toBeVisible();
-}
-
-test('add to cart product', async ({page}) => {
-
-    await loginToApplication(page);
+    await page.goto('https://www.saucedemo.com/inventory.html');
 
     // Initialize POM
     const homePage = new HomePagePOM(page);
@@ -40,9 +20,9 @@ test('add to cart product', async ({page}) => {
     }
 })
 
-test('Filter products by price low to high', async ({page}) => {
+test('Filter products by price low to high', async ({ page }) => {
 
-    await loginToApplication(page);
+    await page.goto('https://www.saucedemo.com/inventory.html');
 
     // Initialize POM
     const homePage = new HomePagePOM(page);
@@ -50,9 +30,9 @@ test('Filter products by price low to high', async ({page}) => {
     await homePage.filterProductsByValue('lohi');
 })
 
-test('logout user', async ({page}) => {
+test('logout user', async ({ page }) => {
 
-    await loginToApplication(page);
+    await page.goto('https://www.saucedemo.com/inventory.html');
 
     // Initialize POM
     const homePage = new HomePagePOM(page);
