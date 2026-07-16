@@ -1,5 +1,5 @@
 import {test} from "@playwright/test";
-import {PracticeFormPOM} from "../../POM/demoQa/PracticeFormPOM.spec";
+import {PracticeFormPOM} from "../../POM/demoQa/PracticeFormPOM";
 import {validUser} from "../../DataFactory/demoQa/practiceForm.factory";
 
 test('fill the form with valid data', async ({page}) => {
@@ -11,7 +11,7 @@ test('fill the form with valid data', async ({page}) => {
     const practiceForm = new PracticeFormPOM(page);
 
     // Data Factory
-    const user = validUser()[0];
+    const user = validUser();
 
     // Actions
     await fillForm({page}, user);

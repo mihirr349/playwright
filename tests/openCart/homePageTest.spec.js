@@ -11,5 +11,4 @@ test('click on shopping cart', async ({page}) => {
 
     // Action
     await homePage.selectCurrency('Euro');
-    await page.pause();
 })
