@@ -1,7 +1,7 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { HomePagePOM } from '../../POM/sauceDemo/HomePOM';
 
-test('add to cart product', async ({ page }) => {
+test.only('add to cart product', async ({ page }) => {
 
     await page.goto('https://www.saucedemo.com/inventory.html');
 
